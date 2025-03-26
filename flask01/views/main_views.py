@@ -6,7 +6,27 @@ mbp = Blueprint('main', __name__, url_prefix='/main')
 
 # localhost:5001/main/
 @mbp.route('/')
-def hello(username):
+def hello():
     return f'{__name__} hello'
 
 # Flask에서 값을 주소줄로 입력받아서 사용하는 방법
+# <변수명>  /변수명
+@mbp.route('/<username>')
+def print_string(username):
+    return f'{__name__} {username} hello'
+
+# <자료형:변수명> 
+# <path:변수명> : / 를 포함한 서브경로 전달
+# <float:변수명> : float 전달
+# <int:변수명> : int로 전달
+@mbp.route('/path/<path:subpath>')
+def print_path(subpath):
+    return f'{__name__} {subpath} hello'
+
+@mbp.route('/상품명/')
+@mbp.route('/items/')
+@mbp.route('/items/<itemname>')
+@mbp.route('/items/<itemname>/<quantity>')
+def print_itemname(itemname='기본값', quantity=0):
+    # print(type(quantity))
+    return f'{__name__} {itemname, quantity} hello'

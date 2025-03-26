@@ -1,3 +1,4 @@
+# flask run --debug --port 5001
 from flask import Flask
 
 # 입구 파일을 하나 만들어줍니다.

@@ -1,41 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> 게시판 글 확인 </h1>
-    <pre>
-        {{ 변수명 }} - 변수 안에 있는 값이 화면에 출력됩니다.
-
-        약간의 분기나 조건을 사용할 때는
-        {# {% if 조건 %} #}
-            조건을 만족할 때 실행문
-            {# {% else %} #}
-            거짓일 때 실행문
-        {# {% endif %} #}
-
-        반복문
-        {#  {% for 반복문 %} #}
-            반복이 돌아갈 동안 실행문
-        {# {% endfor %} #}
-
-
-    </pre>
+{% extends 'base.html' %}
+{% block content %}
+ 
 <!-- 질문 목록 -->
-
 {#  render_template 함수에서 전달받은 질문 목록 데이터 question_list가 있는지 검사 #}
-{% if question_list %}
-    <ul>
-    {#  question_list에 저장된 데이터를 하나씩 꺼내 question 객체에 대입한다. 파이썬의 for~in 문을 떠올리면 쉽게 이해할 수 있을 것이다. #}
-    {% for question in question_list %}
-        <li><a href="detail/{{ question.id }}/">{{ question.subject }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>질문이 없습니다.</p>
-{% endif %}
-</body>
-</html>
+
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if question_list %}
+        {% for question in question_list %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url_for('board.detail', question_id=question.id) }}">{{ question.subject }}</a>
+            </td>
+            <td>{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

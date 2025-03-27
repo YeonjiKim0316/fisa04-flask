@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    게시글이 있으면
+    {% if question %}
+    게시글의 번호
+        {{ question.id }}
+    제목
+        {{ question.subject }}
+    내용
+        {{ question.content }}
+    게시글 작성시간
+        {{ question.create_date }}
+        answer_set이 있으면
+        {% if question.answer_set %}
+            댓글 번호
+            {{ question.answer_set[0].id }}
+            댓글 내용
+            댓글 작성시간 
+        {% endif %}
+    {% else %}
+     해당하는 글이 없습니다.
+    {% endif %}
+
+</body>
+</html>

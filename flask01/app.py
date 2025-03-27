@@ -20,7 +20,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from views import main_views, board_views
+    from board.views import main_views, board_views
     app.register_blueprint(main_views.mbp)
     app.register_blueprint(board_views.cbp)
 

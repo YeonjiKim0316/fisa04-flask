@@ -1,6 +1,7 @@
 
 # Blueprint 기능을 사용해서 collection/no2/
 from flask import Blueprint
+from ..models import Question
 
 cbp = Blueprint('collection', __name__, url_prefix='/board')
 

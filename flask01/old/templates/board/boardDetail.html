@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    게시글이 있으면
+    {% if question %}
+    게시글의 번호: <br>
+        {{ question.id }} <br>
+    제목: <br>
+        {{ question.subject }} <br>
+    내용: <br>
+        {{ question.content }} <br>
+    게시글 작성시간: <br>
+        {{ question.create_date }} <br>
+        
+        {% if question.answer_set %} <br>
+            <hr>
+            {% for answer in question.answer_set %}
+                {% if loop.first %}
+                    <strong> ----시작---✌ </strong>
+                {% elif loop.last %}
+                    <strong> 끝---✌ </strong>
+                {% endif %}
+                댓글 번호 <br>
+                {{ loop.index }} <br>
+                댓글 내용 <br>
+                {{ answer.content }} <br>
+                댓글 작성시간 <br>
+                {{ answer.create_date }} <br>
+                <hr> {# HTML 코드도 JINJA 템플릿 안에 함께 사용 가능합니다. #}
+            {% endfor %}
+        {% endif %} <br>
+    {% else %} <br>
+     해당하는 글이 없습니다. <br>
+    {% endif %} <br>
+{% endblock %}

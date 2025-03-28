@@ -15,7 +15,8 @@ def create_app():
     # 입구 파일을 하나 만들어줍니다.
     app = Flask(__name__)
     app.config.from_object(config)
-
+    app.config['SQLALCHEMY_ECHO'] = True  # 디버깅용 설정
+    
     # ORM을 적용
     db.init_app(app)
     migrate.init_app(app, db)

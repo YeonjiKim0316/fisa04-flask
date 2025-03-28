@@ -22,8 +22,9 @@ def create_app():
     migrate.init_app(app, db)
 
    # 커스텀 진자 필터 등록
-    from filters import format_datetime
+    from filters import format_datetime, format_datetime2
     app.jinja_env.filters['date_time'] = format_datetime
+    app.jinja_env.filters['date_time2'] = format_datetime2
 
     from board.views import main_views, board_views, answer_views
     app.register_blueprint(main_views.mbp)

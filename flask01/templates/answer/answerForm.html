@@ -3,7 +3,9 @@
 <!-- 질문 등록 -->
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">답변 올리기</h5>
-    <form method="post" class="my-3">
+    {# 수정 #}
+    {# 작성 #}
+    <form class="my-3">
         {% if form.errors %}
         <div class="alert alert-danger" role="alert">
             {% for field, errors in form.errors.items() %}

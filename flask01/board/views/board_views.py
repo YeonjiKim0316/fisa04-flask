@@ -2,7 +2,7 @@
 # Blueprint 기능을 사용
 from flask import Blueprint, render_template, redirect, url_for, request
 from ..models import Question
-from ..forms import QuestionForm
+from ..forms import QuestionForm, AnswerForm
 from app import db
 from datetime import datetime
 
@@ -23,7 +23,8 @@ def detail(question_id):
     # get_or_404() 메서드로 값을 조회하면 404에러를 발생시킵니다.
     # question = Question.query.get(question_id)
     question = Question.query.get_or_404(question_id)
-    return render_template('board/boardDetail.html', question=question)
+    form = AnswerForm()
+    return render_template('board/boardDetail.html', question=question, form=form, question_id=question_id)
 
 # 개별 게시글을 작성
 # 1. 작성 버튼을 누르면 게시글 작성하기 위한 form으로 이동 

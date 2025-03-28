@@ -12,10 +12,18 @@ cbp = Blueprint('board', __name__, url_prefix='/board')
 
 # templates 디렉토리 안에 들어있는 file 경로를 읽고, view에 작성한 객체를 달아서 렌더링해서 전달
 # 전체 게시글을 db에서 조회해서 가져와서 리스트
+# @cbp.route('/list')
+# def list():
+#     question = Question.query.all()
+#     return render_template('board/boardList.html', question_list=question)
+
+
 @cbp.route('/list')
 def list():
-    question = Question.query.all()
-    return render_template('board/boardList.html', question_list=question)
+    page = request.args.get('page', type=int, default=1)  # 페이지
+    question_list = Question.query.order_by(Question.create_date.desc())
+    question_list = question_list.paginate(page=page, per_page=10)
+    return render_template('board/boardList.html', question_list=question_list)
 
 # 개별 게시글을 조회할 수 있는 함수
 @cbp.route('/details/<int:question_id>/')

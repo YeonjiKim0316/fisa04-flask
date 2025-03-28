@@ -8,9 +8,11 @@
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
-                    {{ question.create_date }}
+                    {{ question.create_date | date_time }}
                 </div>
             </div>
         </div>
+
+        {{ question.answer_set | default('아직 답변이 달리지 않았습니다.') }}
     </div>
 {% endblock %}

@@ -43,12 +43,6 @@ def create():
 
 # 개별 게시글을 수정
 
-# 댓글 작성
-
-# 댓글 수정
-
-# 댓글 삭제
-
 
 # Blueprint 기능을 사용해서 collection/no1/
 @cbp.route('/no1')

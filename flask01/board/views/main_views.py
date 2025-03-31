@@ -11,6 +11,8 @@ mbp = Blueprint('main', __name__, url_prefix='/')
 def index():
     return render_template('index.html')
 
+
+
 # # Flask에서 값을 주소줄로 입력받아서 사용하는 방법
 # # <변수명>  /변수명
 # @mbp.route('/<username>')

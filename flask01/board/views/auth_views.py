@@ -42,7 +42,7 @@ def login():
         if error is None:
             # 사용자도 존재하고 비밀번호도 일치한다면 플라스크 세션(session)에 사용자 정보를 저장합니다.
 
-						# 세션에 user_id라는 객체 생성
+			# 세션에 user_id라는 객체 생성
             session.clear()
             session['user_id'] = user.id # PK를 저장합니다.
             _next = request.args.get('next', '')

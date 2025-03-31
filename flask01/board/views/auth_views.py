@@ -5,6 +5,7 @@ from werkzeug.utils import redirect
 from app import db
 from board.forms import UserCreateForm, UserLoginForm
 from board.models import User
+import functools  # 우리가 만든 함수를 @어노테이션을 통해 무조건 먼저 실행하도록 걸어줄 수 있게 된다.
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -58,6 +59,7 @@ def load_logged_in_user():
     user_id = session.get('user_id')
     if user_id is None:
         g.user = None
+        # print(g.user or 'None')
     else:
         g.user = User.query.get(user_id)
         # print(g.user or 'None')
@@ -68,7 +70,7 @@ def logout():
     session.clear()
     return redirect(url_for('main.index'))
 
-
+# 로그인을 통한 인가가 필요할 때 @login_required
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(*args, **kwargs):

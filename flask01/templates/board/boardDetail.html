@@ -8,8 +8,15 @@
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
+                    {{ question.user.username }}
+                </div>
+                <div class="badge bg-light text-dark p-2">
                     {{ question.create_date | date_time }}
                 </div>
+                {% if g.user == question.user %}&nbsp;&nbsp;
+                <a class="btn btn-primary" href="{{ url_for('board.modify', question_id=question.id ) }}">수정</a>&nbsp;&nbsp;
+                <a class="btn btn-primary" href="{{ url_for('board.delete', question_id=question.id ) }}">삭제</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -28,10 +35,10 @@
                     {{ answer.create_date | date_time }}
                 </div>
                 <!-- 로그인 된 상태 (g.user), 작성자가 로그인한 사용자와 일치하는 상태-->
-                {# {% if g.user == answer.user %}&nbsp;&nbsp; #}
-                {# <a class="btn btn-primary" href="{{ url_for('answer.modify', answer_id=answer.id ) }}">수정</a>&nbsp;&nbsp; #}
-                {# <a class="btn btn-primary" href="{{ url_for('answer.delete', answer_id=answer.id ) }}">삭제</a> #}
-                {# {% endif %} #}
+                {% if g.user == answer.user %}&nbsp;&nbsp;
+                <a class="btn btn-primary" href="{{ url_for('answer.modify', answer_id=answer.id ) }}">수정</a>&nbsp;&nbsp;
+                <a class="btn btn-primary" href="{{ url_for('answer.delete', answer_id=answer.id ) }}">삭제</a>
+                {% endif %}
             </div>
         </div>
     </div>

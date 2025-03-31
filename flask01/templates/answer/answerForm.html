@@ -3,9 +3,13 @@
 <!-- 질문 등록 -->
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">답변 올리기</h5>
-    {# 수정 #}
+    {# 수정 - modify라는 변수를 flag로 활용해서 #}
+    {% if modify %}
+    <form class="my-3"  method="post" action="{{ url_for('answer.modify', answer_id=answer_id )}}">
     {# 작성 #}
-    <form class="my-3">
+    {% else %}
+    <form class="my-3"  method="post" action="{{ url_for('answer.create', question_id=question_id )}}">
+    {% endif %}
         {% include "form_errors.html" %}
         {{ form.csrf_token }}
 

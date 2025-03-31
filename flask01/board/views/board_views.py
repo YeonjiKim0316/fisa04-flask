@@ -49,11 +49,10 @@ def create():
         return redirect(url_for('board.list'))
     return render_template('board/questionForm.html', form=form)
 
-# 개별 게시글을 삭제
 
 # 개별 게시글을 수정
 # 로그인 여부 확인
-@cbp.route('/modify/<int:question_id>')
+@cbp.route('/modify/<int:question_id>', methods=('GET', 'POST'))
 @login_required
 def modify(question_id):
     # db에서 글을 가져온다

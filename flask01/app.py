@@ -28,6 +28,7 @@ def create_app():
     import logging.config
     import os
     import datetime
+
 		
     # logs 디렉터리 생성
     logs_dir = os.path.join(app.root_path, 'logs')
@@ -41,6 +42,8 @@ def create_app():
         # 즉 debug=true면 이는 false로서 아래 코드를 읽어옵니다.
         # 실제 상용화단계에서 로깅을 진행하라는 의미입니다.
             import logging
+            # pip install python-json-logger 
+            from pythonjsonlogger import jsonlogger  
 
             logging.config.dictConfig({
             'version': 1,
@@ -54,6 +57,11 @@ def create_app():
                     'format': '{levelname} {message}',
                     'style': '{',
                 },
+                'json-format': {  # JSON 형식의 로그 포맷터
+                    '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+                    'format': '%(levelname)s %(asctime)s %(name)s %(message)s',
+                },
+
             },
             'handlers': {
                 'console': { # 콘솔에 출력하는 로그의 범위
@@ -66,7 +74,7 @@ def create_app():
                     'encoding': 'utf-8',
                     'class': 'logging.handlers.RotatingFileHandler',
                     'filename': app.root_path + f'/logs/{today_date}-mysiteLog.log', # 이 파일에 로그를 수집할 예정
-                    'formatter': 'verbose', # 적용시킨 로그 출력 패턴 1대로 수집
+                    'formatter': 'json-format', # 적용시킨 로그 출력 패턴 1대로 수집
                     # 'maxBytes': 1024*1024*5, # 5 MB
                     'maxBytes': 1024*12, # 5 MB
                     'backupCount': 5,

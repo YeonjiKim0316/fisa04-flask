@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 import logging
+from datetime import datetime 
 
 # 로거 추가
 # logger = logging.getLogger('flask.test')
@@ -15,10 +16,18 @@ mbp = Blueprint('main', __name__, url_prefix='/')
 # localhost:5001로 접속하면 index.html을 화면에 렌더링하도록 변경해주세요.
 @mbp.route('/')
 def index():
-    logger.debug('INFO 레벨의 메시지 기록 확인')
-    logger.info('INFO 레벨의 메시지 기록 확인')
-    logger.warning('WARNING 레벨의 메시지 기록 확인')
-    logger.error('ERROR 레벨의 메시지 기록 확인')
+    # 처음 접속
+    # logger.debug('INFO 레벨의 메시지 기록 확인')
+    # logger.info('INFO 레벨의 메시지 기록 확인')
+    log_data = {
+        "event" : "access",
+        "endpoint" : "/",
+        "status" : "success",
+    }
+    logger.info(log_data)
+
+    # logger.warning('WARNING 레벨의 메시지 기록 확인')
+    # logger.error('ERROR 레벨의 메시지 기록 확인')
     return render_template('index.html')
 
 

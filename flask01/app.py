@@ -1,5 +1,5 @@
 # flask run --debug --port 5001
-from flask import Flask
+from flask import Flask, request, g
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
@@ -23,6 +23,13 @@ migrate = Migrate()
 def create_app():
     app= Flask(__name__)
     app.config.from_object(config)
+    
+    
+    # 모든 요청 전 처리 (비즈니스 로직 외 인증 등의 부가 로직)
+    @app.before_request
+    def get_client_ip():
+        g.client_ip = request.remote_addr or "unknown"  # g 객체에 client_ip 저장
+        
 
     # Logging
     import logging.config
@@ -76,7 +83,7 @@ def create_app():
                     'filename': app.root_path + f'/logs/{today_date}-mysiteLog.log', # 이 파일에 로그를 수집할 예정
                     'formatter': 'json-format', # 적용시킨 로그 출력 패턴 1대로 수집
                     # 'maxBytes': 1024*1024*5, # 5 MB
-                    'maxBytes': 1024*12, # 5 MB
+                    'maxBytes': 1024*1, # 1 B
                     'backupCount': 5,
                 },
                 'errors': { # 에러가 난 경우 별도 파일로 수집할 예정
@@ -104,7 +111,6 @@ def create_app():
                 },
             },
         })
-
 
 
     # ORM

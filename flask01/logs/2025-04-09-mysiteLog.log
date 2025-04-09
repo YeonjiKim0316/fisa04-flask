@@ -1,3 +1,1 @@
-{"levelname": "INFO", "asctime": "2025-04-09 12:43:59,399", "name": "my", "message": "", "event": "access", "endpoint": "/", "status": "success"}
-{"levelname": "INFO", "asctime": "2025-04-09 12:44:13,245", "name": "my", "message": "", "event": "inference_entry", "endpoint": "/ml", "status": "success", "username": "test1"}
-{"levelname": "INFO", "asctime": "2025-04-09 12:44:29,523", "name": "my", "message": "", "event": "inference_confirm", "endpoint": "/ml-post", "status": "success", "username": "test1"}
+{"levelname": "INFO", "asctime": "2025-04-09 16:08:38,833", "name": "my", "message": "", "event": "access", "endpoint": "/", "status": "success"}

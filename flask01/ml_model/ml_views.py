@@ -54,7 +54,8 @@ def inference():
         "event" : "inference_confirm",
         "endpoint" : "/ml-post",        
         "status" : "success",
-        "username" : g.user.username
+        "username" : g.user.username,
+        "client_ip" : g.client_ip # 익명의 유저 추적
         }
         logger.info(log_data)
         return render_template('ml_model/result.html', prediction=prediction)
@@ -66,7 +67,8 @@ def inference():
         "event" : "inference_entry",
         "endpoint" : "/ml",
         "status" : "success",
-        "username" : g.user.username
+        "username" : g.user.username,
+        "client_ip" : g.client_ip
     }
     logger.info(log_data)
     # 폼 페이지 렌더링

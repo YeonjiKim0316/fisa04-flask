@@ -1,6 +1,3 @@
-INFO 2025-04-09 11:42:29,796 main_views 25096 21832 INFO 레벨의 메시지 기록 확인
-WARNING 2025-04-09 11:42:29,797 main_views 25096 21832 WARNING 레벨의 메시지 기록 확인
-ERROR 2025-04-09 11:42:29,797 main_views 25096 21832 ERROR 레벨의 메시지 기록 확인
-INFO 2025-04-09 12:23:49,060 main_views 17276 23300 {'event': 'access', 'endpoint': '/', 'timestamp': '2025-04-09T12:23:49.060214', 'status': 'success', 'test': '*************************************************'}
-INFO 2025-04-09 12:23:49,061 main_views 17276 23300 ---------------------------------
-{"levelname": "INFO", "asctime": "2025-04-09 12:28:54,134", "name": "my", "message": "", "event": "access", "endpoint": "/", "timestamp": "2025-04-09T12:28:54.134033", "status": "success"}
+{"levelname": "INFO", "asctime": "2025-04-09 12:43:59,399", "name": "my", "message": "", "event": "access", "endpoint": "/", "status": "success"}
+{"levelname": "INFO", "asctime": "2025-04-09 12:44:13,245", "name": "my", "message": "", "event": "inference_entry", "endpoint": "/ml", "status": "success", "username": "test1"}
+{"levelname": "INFO", "asctime": "2025-04-09 12:44:29,523", "name": "my", "message": "", "event": "inference_confirm", "endpoint": "/ml-post", "status": "success", "username": "test1"}

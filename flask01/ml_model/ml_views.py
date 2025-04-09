@@ -15,13 +15,6 @@ mlbp = Blueprint('ml_model', __name__, url_prefix='/ml')
 @mlbp.route('/', methods=['GET', 'POST'])
 @login_required
 def inference():
-    # ml_model에 접근 -1 
-    log_data = {
-        "event" : "inference_entry",
-        "endpoint" : "/ml",
-        "status" : "success",
-    }
-    logger.info(log_data)
     form = InsuranceForm()  # forms.py에 정의된 폼 객체 생성
 
     # 실습2. forms.py에 작성된 form을 활용하여 데이터를 한번에 입력받을 수 있도록 활용
@@ -57,9 +50,25 @@ def inference():
 
         # 결과 페이지 렌더링
         # 로그 - 예측 완료 
+        log_data = {
+        "event" : "inference_confirm",
+        "endpoint" : "/ml-post",        
+        "status" : "success",
+        "username" : g.user.username
+        }
+        logger.info(log_data)
         return render_template('ml_model/result.html', prediction=prediction)
 
     previous_results= Insurance.query.filter_by(user_id=g.user.id).all()
+    
+    # ml_model에 접근 -1 
+    log_data = {
+        "event" : "inference_entry",
+        "endpoint" : "/ml",
+        "status" : "success",
+        "username" : g.user.username
+    }
+    logger.info(log_data)
     # 폼 페이지 렌더링
     return render_template('ml_model/form.html', form=form, results=previous_results)
 

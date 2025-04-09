@@ -24,6 +24,81 @@ def create_app():
     app= Flask(__name__)
     app.config.from_object(config)
 
+    # Logging
+    import logging.config
+    import os
+    import datetime
+		
+    # logs 디렉터리 생성
+    logs_dir = os.path.join(app.root_path, 'logs')
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)  
+
+
+    today_date = datetime.datetime.now().strftime("%Y-%m-%d")  
+    # if not app.debug: 
+    if app.debug: 
+        # 즉 debug=true면 이는 false로서 아래 코드를 읽어옵니다.
+        # 실제 상용화단계에서 로깅을 진행하라는 의미입니다.
+            import logging
+
+            logging.config.dictConfig({
+            'version': 1,
+            'disable_existing_loggers': False,
+            'formatters': {
+                'verbose': {  # 로그 출력 패턴 1
+                    'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+                    'style': '{',
+                },
+                'simple': { # 로그 출력 패턴 2
+                    'format': '{levelname} {message}',
+                    'style': '{',
+                },
+            },
+            'handlers': {
+                'console': { # 콘솔에 출력하는 로그의 범위
+                    'level': 'INFO',
+                    'class': 'logging.StreamHandler',
+                    'formatter': 'verbose',
+                },
+                'file': {
+                    'level': 'DEBUG',
+                    'encoding': 'utf-8',
+                    'class': 'logging.handlers.RotatingFileHandler',
+                    'filename': app.root_path + f'/logs/{today_date}-mysiteLog.log', # 이 파일에 로그를 수집할 예정
+                    'formatter': 'verbose', # 적용시킨 로그 출력 패턴 1대로 수집
+                    # 'maxBytes': 1024*1024*5, # 5 MB
+                    'maxBytes': 1024*12, # 5 MB
+                    'backupCount': 5,
+                },
+                'errors': { # 에러가 난 경우 별도 파일로 수집할 예정
+                    'level': 'ERROR',
+					'encoding': 'utf-8',
+                    'class': 'logging.FileHandler',
+                    'filename': app.root_path + f'/logs/{today_date}-mysiteErrorLog.log', # logs 폴더 생성 필요
+                    'formatter': 'simple', # 로그 출력 패턴 2대로 수집
+                },
+            },
+            'loggers': {
+                'flask.app': {  
+                    'handlers': ['console', 'file'],
+                    'level': 'DEBUG',
+                    'propagate': True,
+                },
+                'flask.request': {
+                    'handlers': ['errors'],
+                    'level': 'ERROR',
+                    'propagate': True,
+                },
+                'my': {
+                    'handlers': ['console', 'file', 'errors'],
+                    'level': 'INFO',
+                },
+            },
+        })
+
+
+
     # ORM
     db.init_app(app)
     if app.config['SQLALCHEMY_DATABASE_URI'].startswith("sqlite"):

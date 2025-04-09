@@ -1,4 +1,10 @@
 from flask import Blueprint, render_template
+import logging
+
+# 로거 추가
+# logger = logging.getLogger('flask.test')
+logger = logging.getLogger('my')  # my 세팅 상태로 변경해보고 Error Log 수집여부 확인
+
 
 # 특정 /main/ 하위에 있는 함수들을 일괄적으로 관리하기 위한 flask의 기능
                 # 코드에서 부르는 상대적 이름, 실제 파일명, url에 매칭되는 경로 
@@ -9,6 +15,10 @@ mbp = Blueprint('main', __name__, url_prefix='/')
 # localhost:5001로 접속하면 index.html을 화면에 렌더링하도록 변경해주세요.
 @mbp.route('/')
 def index():
+    logger.debug('INFO 레벨의 메시지 기록 확인')
+    logger.info('INFO 레벨의 메시지 기록 확인')
+    logger.warning('WARNING 레벨의 메시지 기록 확인')
+    logger.error('ERROR 레벨의 메시지 기록 확인')
     return render_template('index.html')
 
 

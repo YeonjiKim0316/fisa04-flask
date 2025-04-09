@@ -1,0 +1,13 @@
+# 1. DB MIGRATION
+- SQLite로 개발 db를 만들었는데 RDS 로 이전
+
+# 2. Dockerize 
+- 사용자가 어떤 경로로 우리 서비스 사용하는지 로깅 
+- 로깅파일은 밖으로 뺍니다.
+- static 디렉토리 밑에 있는 파일들 -> S3 이전
+- nginx로 로드밸런싱 기능 추가
+- docker hub로 보내고
+
+# 3. EC2로 DOCKER설치
+- docker hub에서 받아서 run
+

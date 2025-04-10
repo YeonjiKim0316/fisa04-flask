@@ -11,6 +11,7 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 DB_NAME = os.getenv('DB_NAME')
 S3_STATIC_URL = os.getenv('S3_STATIC_URL')
+# print(S3_STATIC_URL)
 myDB = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 mySecret=os.environ.get("SECRET_KEY")
 SQLALCHEMY_DATABASE_URI = myDB

@@ -44,8 +44,8 @@ def create_app():
 
 
     today_date = datetime.datetime.now().strftime("%Y-%m-%d")  
-    # if not app.debug: 
-    if app.debug: 
+    if not app.debug: 
+    # if app.debug: 
         # 즉 debug=true면 이는 false로서 아래 코드를 읽어옵니다.
         # 실제 상용화단계에서 로깅을 진행하라는 의미입니다.
             import logging

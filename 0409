@@ -12,3 +12,4 @@
 # 3. EC2로 DOCKER설치
 - docker hub에서 받아서 run
 
+# 4. Jenkins CI/CD 파이프라인 구축

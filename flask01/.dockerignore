@@ -3,6 +3,6 @@ migrations/
 
 # 어느 디렉토리 밑에 있건 재귀적으로 적용
 **/__pycache__/
-
+Dockerfile.og
 
 .env

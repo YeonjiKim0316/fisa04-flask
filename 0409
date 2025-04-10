@@ -7,6 +7,7 @@
 - static 디렉토리 밑에 있는 파일들 -> S3 이전 v
 - nginx로 로드밸런싱 기능 추가
 - docker hub로 보내고
+- 실행합니다.
 
 # 3. EC2로 DOCKER설치
 - docker hub에서 받아서 run

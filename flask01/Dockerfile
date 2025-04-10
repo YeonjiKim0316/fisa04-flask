@@ -29,7 +29,7 @@ COPY . .
 RUN chown -R appuser:appuser /app
 
 # 비루트 사용자로 실행하도록 설정
-# USER appuser
+USER appuser
 
 # (선택) 명시적으로 포트 노출 – 기본적으로 80 포트를 사용
-# EXPOSE 80
+EXPOSE 80
